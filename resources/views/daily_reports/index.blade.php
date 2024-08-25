@@ -27,11 +27,11 @@
                                         <td>{{ $report->tasks_completed }}</td>
                                         <td>{{ $report->feedback }}</td>
                                         <td>
-                                            @if (Auth::user()->role == 'supervisor')
+                                            @if (Auth::user()->hasRole('supervisor'))
                                                 <a href="{{ route('daily_reports.edit', ['id' => $report->id]) }}"
                                                     class="btn btn-sm btn-primary">Tanggapi</a>
                                             @endif
-                                            @if (Auth::user()->role == 'magang')
+                                            @if (Auth::user()->hasRole('magang'))
                                                 <form action="{{ route('daily_reports.destroy', ['id' => $report->id]) }}"
                                                     method="POST" style="display: inline;">
                                                     @csrf
