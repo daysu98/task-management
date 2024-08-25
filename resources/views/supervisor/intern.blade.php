@@ -7,18 +7,20 @@
             <table class="table table-bordered" id="interns-table">
                 <thead>
                     <tr>
-                        <th>Nama</th>
+                        <th>ID</th>
+                        <th>Name</th>
                         <th>Email</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th>Department</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($interns as $intern)
                         <tr>
+                            <td>{{ $intern->id }}</td>
                             <td>{{ $intern->name }}</td>
                             <td>{{ $intern->email }}</td>
-                            <td>{{ $intern->status }}</td>
+                            <td>{{ $intern->department ? $intern->department->name : 'N/A' }}</td>
                             <td>
                                 <a href="{{ route('supervisor.show-intern', ['internId' => $intern->id]) }}"
                                     class="btn btn-sm btn-info">Detail</a>

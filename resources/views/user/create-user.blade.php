@@ -49,6 +49,18 @@
                             @endforeach
                         </select>
                     </div>
+                    
+                    @if (request()->is('admin/create/magang'))
+                    <div class="form-group">
+                        <label for="supervisor_id">Supervisor | untuk admin & supervisor tidak ada supervisor</label>
+                        <select class="form-control" id="supervisor_id" name="supervisor_id">
+                            <option value="">Select Supervisor</option>
+                            @foreach ($supervisors as $supervisor)
+                                <option value="{{ $supervisor->id }}">{{ $supervisor->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @endif
 
                     <div class="form-group">
                         <label for="status">Status</label>

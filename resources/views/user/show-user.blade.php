@@ -16,15 +16,20 @@
                             <div class="col-md-10">
                                 <h5 class="card-title">{{ $user->name }}</h5>
                                 <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
-                                <p class="card-text"><strong>Role:</strong> <button class="btn btn-primary btn-sm ">{{ ucfirst($user->roles[0]->name) }}</button> </p>
+                                <p class="card-text"><strong>Roles:</strong>
+                                    @foreach ($user->getRoleNames() as $role)
+                                        <button class="btn btn-primary btn-sm">{{ $role }}</button>
+                                    @endforeach
+                                </p>
                                 <p class="card-text"><strong>Status:</strong> {{ ucfirst($user->status) }}</p>
                                 <p class="card-text"><strong>Phone:</strong> {{ $user->phone ?: 'N/A' }}</p>
                                 <p class="card-text"><strong>Location:</strong> {{ $user->location ?: 'N/A' }}</p>
                                 <p class="card-text"><strong>About Me:</strong> {{ $user->about_me ?: 'N/A' }}</p>
                                 <p class="card-text"><strong>Department:</strong>
                                     {{ $user->department ? $user->department->name : 'N/A' }}</p>
-                                <a href="{{ route('admin.edit-user', ['role' => $user->roles[0]->id, 'userId' => $user->id]) }}"
+                                <a href="{{ route('admin.edit-user', ['role' => $user->getRoleNames()->first(), 'userId' => $user->id]) }}"
                                     class="btn btn-primary">Edit User</a>
+
                             </div>
                         </div>
                     </div>

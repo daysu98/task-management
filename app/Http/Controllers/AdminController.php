@@ -46,7 +46,8 @@ class AdminController extends Controller
     {
         $siteSettings = SiteSetting::firstOrFail();
         $departments = Department::all();
-        return view('user.create-user', compact('departments', 'role', 'siteSettings'));
+        $supervisors = User::role('supervisor')->with('department')->get();
+        return view('user.create-user', compact('departments', 'role', 'siteSettings', 'supervisors'));
     }
 
     public function storeUser(Request $request, $role)
@@ -59,6 +60,7 @@ class AdminController extends Controller
                 'phone' => 'nullable|string',
                 'location' => 'nullable|string',
                 'department_id' => 'nullable|exists:departments,id',
+                'supervisor_id' => 'nullable|exists:users,id',
                 'about_me' => 'nullable|string',
                 'status' => 'required|in:active,inactive,blocked',
             ]);
@@ -72,6 +74,7 @@ class AdminController extends Controller
             $user->phone = $validatedData['phone'];
             $user->location = $validatedData['location'];
             $user->department_id = $validatedData['department_id'];
+            $user->supervisor_id = $validatedData['supervisor_id'];
             $user->status = $status;
             $user->about_me = $validatedData['about_me'];
             $user->save();
