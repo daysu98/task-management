@@ -8,7 +8,7 @@
                     <div class="card-header">Daily Reports</div>
 
                     <div class="card-body">
-                        @if (Auth::user()->role == 'magang')
+                        @if (Auth::user()->hasRole('magang'))
                             <a href="{{ route('daily_reports.create') }}" class="btn btn-primary mb-3">Create Daily Report</a>
                         @endif
                         <table class="table">
